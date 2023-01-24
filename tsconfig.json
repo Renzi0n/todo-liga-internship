@@ -47,6 +47,9 @@
       "constants/*": [
         "./src/constants/*"
       ],
+      "router/*": [
+        "./src/router/*"
+      ],
       "components/*": [
         "./src/components/*"
       ],
