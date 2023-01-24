@@ -40,6 +40,7 @@ module.exports = {
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
     'no-unused-vars': 'warn',
+    'no-console': 'warn',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
