@@ -4,11 +4,7 @@ const { merge } = require('webpack-merge');
 const ignoredFiles = require('react-dev-utils/ignoredFiles');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const BaseConfig = require('./webpack.config');
-const { dist, publicUrlOrPath, src, isHTTPS, CRT, KEY } = require('./constants');
-const getHttpsConfig = require('./webpack.config.https');
-
-const serverConfig = getHttpsConfig();
-const hasHTTPSConfig = typeof serverConfig !== 'boolean';
+const { dist, publicUrlOrPath, src } = require('./constants');
 
 const devWebpackConfig = merge(BaseConfig, {
   // DEV config
@@ -33,19 +29,12 @@ const devWebpackConfig = merge(BaseConfig, {
       publicPath: publicUrlOrPath.slice(0, -1),
     },
     port: 8080,
-    server: {
-      type: isHTTPS ? 'https' : 'http',
-      options: !hasHTTPSConfig
-        ? {
-            requestCert: false,
-          }
-        : serverConfig,
-    },
     historyApiFallback: {
       disableDotRule: true,
       index: publicUrlOrPath,
     },
     client: {
+      progress: true,
       overlay: {
         errors: true,
         warnings: false,
@@ -62,15 +51,9 @@ const devWebpackConfig = merge(BaseConfig, {
       {
         host: 'localhost',
         port: 3000,
-        proxy: isHTTPS ? 'https://localhost:8080/' : 'http://localhost:8080/',
+        proxy: 'http://localhost:8080/',
         notify: false,
-        https:
-          isHTTPS && hasHTTPSConfig
-            ? {
-                cert: CRT,
-                key: KEY,
-              }
-            : false,
+        https: false,
       },
       {
         reload: false,

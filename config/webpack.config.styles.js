@@ -16,7 +16,7 @@ module.exports = function (cssOptions, preProcessor) {
             options: publicUrlOrPath.startsWith('.')
               ? {
                   publicPath: (resourcePath, context) => {
-                    return `${path.relative(path.dirname(resourcePath), context)  }/`;
+                    return `${path.relative(path.dirname(resourcePath), context)}/`;
                   },
                 }
               : {},
@@ -41,7 +41,7 @@ module.exports = function (cssOptions, preProcessor) {
           loader: require.resolve('resolve-url-loader'),
           options: {
             sourceMap: true,
-            root: src
+            root: src,
           },
         },
         {

@@ -27,6 +27,8 @@ const createEnvironmentHash = require('./webpack.config.cache');
 const getClientEnvironment = require('./webpack.config.env');
 const tsConfigRaw = require('../tsconfig.json');
 
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+
 const env = getClientEnvironment(publicUrlOrPath.slice(0, -1));
 
 // style files regexes
@@ -71,9 +73,10 @@ module.exports = {
     },
   },
   infrastructureLogging: {
-    level: 'none',
+    level: 'verbose',
   },
   resolve: {
+    plugins: [new TsconfigPathsPlugin()],
     extensions: moduleFileExtensions.map((ext) => `.${ext}`),
     modules: ['node_modules', nodeModules].concat(modules.additionalModulePaths || []),
   },

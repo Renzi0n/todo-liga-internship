@@ -1,13 +1,20 @@
 module.exports = {
   root: true,
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
+  overrides: [
+    {
+      files: ['**/*.ts?(x)'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+        ecmaVersion: 2021,
+        tsconfigRootDir: __dirname,
+        project: ['./tsconfig.json'],
+        sourceType: 'module',
+      },
     },
-  },
+  ],
   settings: {
     react: {
       version: 'detect',
