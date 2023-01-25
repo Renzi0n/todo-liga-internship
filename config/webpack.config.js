@@ -7,6 +7,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const tsConfigRaw = require('../tsconfig.json');
 const localIdent = require('./css.modules.config');
 const {
   src,
@@ -25,9 +27,6 @@ const modules = require('./webpack.config.modules');
 const styleLoaders = require('./webpack.config.styles');
 const createEnvironmentHash = require('./webpack.config.cache');
 const getClientEnvironment = require('./webpack.config.env');
-const tsConfigRaw = require('../tsconfig.json');
-
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const env = getClientEnvironment(publicUrlOrPath.slice(0, -1));
 
@@ -125,6 +124,10 @@ module.exports = {
       {
         test: /\.(ttf|eot|woff|woff2)$/,
         type: 'asset/resource',
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: sassRegex,

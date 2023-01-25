@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
   "scripts": {
     "dev": "webpack serve --progress --config ./config/webpack.config.dev.js",
     "build": "webpack --mode=production --progress --config ./config/webpack.config.prod.js",
@@ -38,7 +43,7 @@
     "browser-sync-webpack-plugin": "2.3.0",
     "copy-webpack-plugin": "11.0.0",
     "cross-env": "7.0.3",
-    "css-loader": "6.7.1",
+    "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "4.0.0",
     "cssnano": "5.1.11",
     "cypress": "10.1.0",
@@ -47,11 +52,11 @@
     "esbuild-loader": "2.19.0",
     "eslint": "8.8.0",
     "eslint-config-prettier": "8.3.0",
+    "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-import": "2.25.4",
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "7.28.0",
-    "eslint-plugin-simple-import-sort": "7.0.0",
     "fork-ts-checker-webpack-plugin": "7.2.11",
     "html-webpack-plugin": "5.5.0",
     "husky": "8.0.1",
