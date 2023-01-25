@@ -40,36 +40,40 @@
     "inlineSourceMap": false,
     "declarationMap": false,
     "incremental": true,
+    "baseUrl": ".",
     "paths": {
+      "app/*": [
+        "src/app/*"
+      ],
       "assets/*": [
-        "./src/assets/*"
+        "src/assets/*"
       ],
       "constants/*": [
-        "./src/constants/*"
+        "src/constants/*"
       ],
       "router/*": [
-        "./src/router/*"
+        "src/router/*"
       ],
       "components/*": [
-        "./src/components/*"
+        "src/components/*"
       ],
       "domains/*": [
-        "./src/domains/*"
+        "src/domains/*"
       ],
       "services/*": [
-        "./src/services/*"
+        "src/services/*"
       ],
       "helpers/*": [
-        "./src/helpers/*"
+        "src/helpers/*"
       ],
       "modules/*": [
-        "./src/modules/*"
+        "src/modules/*"
       ],
       "pages/*": [
-        "./src/pages/*"
+        "src/pages/*"
       ],
       "http/*": [
-        "./src/http/*"
+        "src/http/*"
       ]
     }
   },

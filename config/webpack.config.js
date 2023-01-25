@@ -187,7 +187,7 @@ module.exports = {
           basedir: nodeModules,
         }),
         context: appPath,
-        configFile: './tsconfig.json',
+        configFile: 'tsconfig.json',
         diagnosticOptions: {
           syntactic: true,
         },
