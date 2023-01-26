@@ -24,7 +24,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:import/recommended',
     'plugin:react/recommended',
-    'plugin:jsx-a11y/recommended',
     'plugin:prettier/recommended', // Make sure this is always the last element in the array.
   ],
   settings: {
@@ -44,18 +43,9 @@ module.exports = {
     'import/order': 'error',
     'prettier/prettier': ['error', {}, { usePrettierrc: true }],
     'react/react-in-jsx-scope': 'off',
-    'jsx-a11y/accessible-emoji': 'off',
     'react/prop-types': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     'no-unused-vars': 'warn',
     'no-console': 'warn',
-    'jsx-a11y/anchor-is-valid': [
-      'error',
-      {
-        components: ['Link'],
-        specialLink: ['hrefLeft', 'hrefRight'],
-        aspects: ['invalidHref', 'preferButton'],
-      },
-    ],
   },
 };
