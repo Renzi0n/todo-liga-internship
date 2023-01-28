@@ -21,6 +21,10 @@ export function Task({ task }: TaskProps) {
             <i className="fa fa-trash-o" />
           </button>
 
+          <button type="button" className="task__btn btn btn-outline-danger btn-sm float-right btn-delete">
+            <i className="fa fa-check"></i>
+          </button>
+
           <Link className="task__btn btn btn-outline-secondary btn-sm float-right" to={`${ROOT}${EDIT}/${id}`}>
             <i className="fa fa-pencil" />
           </Link>

@@ -9,7 +9,7 @@
 }
 
 .task__btns {
-  min-width: 100px;
+  min-width: 140px;
   display: flex;
   justify-content: space-between;
 }
