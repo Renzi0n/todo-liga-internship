@@ -1,5 +1,5 @@
 import { action, computed, makeObservable, observable } from 'mobx';
-import { TaskEntity, TasksStatsEntity } from 'domains/index';
+import { TaskEntity, TasksSearchEntity, TasksStatsEntity } from 'domains/index';
 import { TasksMock, TasksStatsMock } from '__mocks__/Tasks';
 import { delay } from 'helpers/index';
 
@@ -48,8 +48,9 @@ class TasksStore {
     return this._tasksStats;
   }
 
-  loadTasks = async () => {
+  loadTasks = async (searchForm?: TasksSearchEntity) => {
     this._isTasksLoading = true;
+    console.log(searchForm);
     // TODO: Убрать моки, привязаться к бэку
     this._tasks = TasksMock;
     this._tasksStats = TasksStatsMock;
@@ -60,19 +61,16 @@ class TasksStore {
   changeTaskImportance = (taskId: TaskEntity['id'], targetStatus: boolean) => {
     // TODO: Добавить запрос к серверу
     console.log('important', taskId, targetStatus);
-    this.loadTasks();
   };
 
   changeTaskComplete = (taskId: TaskEntity['id'], targetStatus: boolean) => {
     // TODO: Добавить запрос к серверу
     console.log('complete', taskId, targetStatus);
-    this.loadTasks();
   };
 
   deleteTask = (taskId: TaskEntity['id']) => {
     // TODO: Добавить запрос к серверу
     console.log('delete', taskId);
-    this.loadTasks();
   };
 }
 

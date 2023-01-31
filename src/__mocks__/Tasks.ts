@@ -1,4 +1,4 @@
-import { TaskEntity, TasksStatsEntity } from 'domains/index';
+import { TaskEditFormEntity, TaskEntity, TasksStatsEntity } from 'domains/index';
 
 export const TasksMock: TaskEntity[] = [
   {
@@ -35,4 +35,11 @@ export const TasksStatsMock: TasksStatsEntity = {
   total: 5,
   important: 5,
   completed: 4,
+};
+
+export const TaskForEditMock: TaskEditFormEntity = {
+  name: 'todo',
+  info: 'todo',
+  isImportant: true,
+  isCompleted: false,
 };

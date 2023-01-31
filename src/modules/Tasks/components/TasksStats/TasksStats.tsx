@@ -1,20 +1,28 @@
 import React from 'react';
 import { TaskStatsProps } from './TasksStats.types';
-
-function GrowLoader() {
-  return (
-    <div className="spinner-grow spinner-grow-sm" role="status">
-      <span className="visually-hidden">Loading...</span>
-    </div>
-  );
-}
+import { Loader } from 'components/index';
 
 export function TasksStats({ total, important, completed, isLoading }: TaskStatsProps) {
   return (
     <div className="d-flex w-100 justify-content-between">
-      <p>Total: {isLoading ? <GrowLoader /> : <span className="badge bg-secondary">{total}</span>}</p>
-      <p>Important: {isLoading ? <GrowLoader /> : <span className="badge bg-secondary">{important}</span>}</p>
-      <p>Done: {isLoading ? <GrowLoader /> : <span className="badge bg-secondary">{completed}</span>}</p>
+      <p>
+        Total:{' '}
+        <Loader isLoading={isLoading} variant="dot">
+          <span className="badge bg-secondary">{total}</span>
+        </Loader>
+      </p>
+      <p>
+        Important:
+        <Loader isLoading={isLoading} variant="dot">
+          <span className="badge bg-secondary">{important}</span>
+        </Loader>
+      </p>
+      <p>
+        Done:
+        <Loader isLoading={isLoading} variant="dot">
+          <span className="badge bg-secondary">{completed}</span>
+        </Loader>
+      </p>
     </div>
   );
 }

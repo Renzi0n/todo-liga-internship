@@ -7,4 +7,5 @@ export interface TextFieldProps {
   containerClassName?: string;
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  errorText?: string;
 }

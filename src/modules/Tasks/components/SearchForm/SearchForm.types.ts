@@ -1,3 +1,5 @@
+import { TasksSearchEntity } from 'domains/task.entity';
+
 export interface SearchFormProps {
-  findTasks: () => void;
+  findTasks: (searchForm?: TasksSearchEntity) => void;
 }

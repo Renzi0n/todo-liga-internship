@@ -1,8 +1,7 @@
-import { FILTER_TYPES } from './StatusFilter.constants';
-
-export type FiltersType = typeof FILTER_TYPES[keyof typeof FILTER_TYPES];
+import { FiltersType } from 'domains/index';
 
 export interface StatusFilterProps {
+  tasksType: FiltersType;
   // eslint-disable-next-line no-unused-vars
-  onChange?: (status: FiltersType) => void;
+  onChange: (tasksType: FiltersType) => void;
 }

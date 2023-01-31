@@ -1,0 +1,11 @@
+.edit-form {
+  min-height: 250px;
+}
+
+.text-field, .edit-task-button {
+  min-width: 100%;
+}
+
+.edit-checkbox {
+  margin-right: auto;
+}

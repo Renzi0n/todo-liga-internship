@@ -1,7 +1,16 @@
 import React from 'react';
 import { TextFieldProps } from './TextField.types';
+import './TextField.css';
 
-export function TextField({ label, placeholder, containerClassName = '', inputType, value, onChange }: TextFieldProps) {
+export function TextField({
+  label,
+  placeholder,
+  containerClassName = '',
+  inputType,
+  value,
+  onChange,
+  errorText,
+}: TextFieldProps) {
   return (
     <div className={`mb-3 ${containerClassName}`}>
       <label htmlFor={label} className="form-label">
@@ -15,6 +24,7 @@ export function TextField({ label, placeholder, containerClassName = '', inputTy
         value={value}
         onChange={onChange}
       />
+      {errorText && <div className="invalid">{errorText}</div>}
     </div>
   );
 }
