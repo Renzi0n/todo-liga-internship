@@ -201,9 +201,6 @@ module.exports = {
         mode: 'write-references',
         profile: true,
       },
-      logger: {
-        infrastructure: 'silent',
-      },
     }),
     new ESLintPlugin({
       extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
