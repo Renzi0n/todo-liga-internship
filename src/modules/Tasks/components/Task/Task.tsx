@@ -29,6 +29,7 @@ export function Task({ task, changeTaskImportance, deleteTask, changeTaskComplet
             className={`task__btn btn ${
               isImportant ? 'btn-success' : 'btn-outline-success'
             } btn-sm float-right btn-important`}
+            disabled={isCompleted}
             onClick={onBtnImportantClick}>
             <i className="fa fa-exclamation" />
           </button>

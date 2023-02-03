@@ -10,13 +10,14 @@
   },
   "scripts": {
     "dev": "webpack serve --progress --config ./config/webpack.config.dev.js",
-    "build": "webpack --mode=production --progress --config ./config/webpack.config.prod.js",
+    "build": "webpack --mode=production --progress --config ./config/webpack.config.prod.js ",
     "watch": "webpack --progress=profile --config ./config/webpack.config.watch.js",
     "test": "jest --config ./config/jest.config.js",
     "lint:styles": "stylelint ./src/**/*.scss",
     "fix:styles": "stylelint --fix ./src/**/*.scss",
     "lint:ts": "eslint src/**/*.{ts,tsx}",
-    "fix:ts": "eslint src/**/*.{ts,tsx} --quiet --fix"
+    "fix:ts": "eslint src/**/*.{ts,tsx} --quiet --fix",
+    "swagger-types": "npx openapi-typescript http://ovz1.j50031265.px7zm.vps.myjino.ru/swagger.json --output src/http/model/todo.swagger.ts && eslint src/http/model/todo.swagger.ts --fix --no-ignore"
   },
   "author": "",
   "license": "ISC",

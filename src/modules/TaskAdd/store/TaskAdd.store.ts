@@ -1,5 +1,6 @@
 import { action, makeObservable } from 'mobx';
 import { TaskAddFormEntity } from 'domains/taskAdd.entity';
+import { TaskAgentInstance } from 'http/index';
 
 class TaskAddStore {
   constructor() {
@@ -8,10 +9,14 @@ class TaskAddStore {
     });
   }
 
-  addTask = (task: TaskAddFormEntity): boolean => {
-    console.log('task added', task);
+  addTask = async (task: TaskAddFormEntity): Promise<boolean> => {
+    try {
+      await TaskAgentInstance.createTask(task);
 
-    return true;
+      return true;
+    } catch {
+      return false;
+    }
   };
 }
 

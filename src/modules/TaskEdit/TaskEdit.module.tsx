@@ -12,7 +12,7 @@ import { PATH_LIST } from 'constants/paths';
 import './TaskEdit.css';
 
 function TaskEditProto() {
-  const { control, handleSubmit, setValue, reset } = useForm<TaskEditFormEntity>({
+  const { control, handleSubmit, setValue, reset, watch } = useForm<TaskEditFormEntity>({
     mode: 'all',
     defaultValues: DEFAULT_FORM,
     resolver: yupResolver(taskEditSchema),
@@ -28,7 +28,7 @@ function TaskEditProto() {
   }, []);
 
   useEffect(() => {
-    reset(TaskEditStoreInstance.taskForm);
+    if (TaskEditStoreInstance.taskForm) reset(TaskEditStoreInstance.taskForm);
   }, [TaskEditStoreInstance.taskForm]);
 
   const onSubmit: MouseEventHandler<HTMLButtonElement> = (evt) => {
@@ -53,72 +53,82 @@ function TaskEditProto() {
 
   const onCompletedCheckboxChange: ChangeEventHandler<HTMLInputElement> = (evt) => {
     setValue('isCompleted', evt.target.checked);
+    if (evt.target.checked) setValue('isImportant', false);
   };
+
+  const isCompleted = watch('isCompleted');
 
   return (
     <form className="edit-form d-flex flex-column align-items-center justify-content-center">
       <Loader isLoading={TaskEditStoreInstance.isTaskLoading}>
-        <Controller
-          control={control}
-          name="name"
-          render={({ field, fieldState: { error } }) => (
-            <TextField
-              containerClassName="text-field"
-              label="Task name"
-              inputType="text"
-              placeholder="Clean room"
-              value={field.value}
-              onChange={onTaskNameChange}
-              errorText={error?.message}
+        {TaskEditStoreInstance.taskForm ? (
+          <>
+            <Controller
+              control={control}
+              name="name"
+              render={({ field, fieldState: { error } }) => (
+                <TextField
+                  containerClassName="text-field"
+                  label="Task name"
+                  inputType="text"
+                  placeholder="Clean room"
+                  value={field.value}
+                  onChange={onTaskNameChange}
+                  errorText={error?.message}
+                />
+              )}
             />
-          )}
-        />
-        <Controller
-          control={control}
-          name="info"
-          render={({ field, fieldState: { error } }) => (
-            <TextField
-              containerClassName="text-field"
-              label="What to do(description)"
-              inputType="text"
-              placeholder="Clean my room"
-              value={field.value}
-              onChange={onInfoChange}
-              errorText={error?.message}
+            <Controller
+              control={control}
+              name="info"
+              render={({ field, fieldState: { error } }) => (
+                <TextField
+                  containerClassName="text-field"
+                  label="What to do(description)"
+                  inputType="text"
+                  placeholder="Clean my room"
+                  value={field.value}
+                  onChange={onInfoChange}
+                  errorText={error?.message}
+                />
+              )}
             />
-          )}
-        />
-        <Controller
-          control={control}
-          name="isImportant"
-          render={({ field }) => (
-            <Checkbox
-              containerClassName="edit-checkbox"
-              label="Important"
-              checked={field.value}
-              onChange={onImportantCheckboxChange}
+            <Controller
+              control={control}
+              name="isImportant"
+              render={({ field }) => (
+                <Checkbox
+                  containerClassName="edit-checkbox"
+                  label="Important"
+                  checked={field.value}
+                  onChange={onImportantCheckboxChange}
+                  disabled={isCompleted}
+                />
+              )}
             />
-          )}
-        />
-        <Controller
-          control={control}
-          name="isCompleted"
-          render={({ field }) => (
-            <Checkbox
-              containerClassName="edit-checkbox"
-              label="Completed"
-              checked={field.value}
-              onChange={onCompletedCheckboxChange}
+            <Controller
+              control={control}
+              name="isCompleted"
+              render={({ field }) => (
+                <Checkbox
+                  containerClassName="edit-checkbox"
+                  label="Completed"
+                  checked={field.value}
+                  onChange={onCompletedCheckboxChange}
+                />
+              )}
             />
-          )}
-        />
-        <button
-          disabled={TaskEditStoreInstance.isTaskLoading}
-          type="submit"
-          className="btn btn-secondary d-block edit-task-button"
-          onClick={onSubmit}>
-          Edit task
-        </button>
+            <button
+              disabled={TaskEditStoreInstance.isTaskLoading}
+              type="submit"
+              className="btn btn-secondary d-block edit-task-button"
+              onClick={onSubmit}>
+              Edit task
+            </button>
+          </>
+        ) : (
+          <p>Not found</p>
+        )}
       </Loader>
     </form>
   );

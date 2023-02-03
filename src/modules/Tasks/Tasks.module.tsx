@@ -11,12 +11,9 @@ function TasksProto() {
   return (
     <>
       <SearchForm findTasks={TasksStoreInstance.loadTasks} />
-      <TasksStats
-        isLoading={TasksStoreInstance.isTasksLoading}
-        total={TasksStoreInstance.tasks.length}
-        important={0}
-        completed={0}
-      />
+      {TasksStoreInstance.tasksStats && (
+        <TasksStats isLoading={TasksStoreInstance.isTasksLoading} {...TasksStoreInstance.tasksStats} />
+      )}
       <TasksList
         isLoading={TasksStoreInstance.isTasksLoading}
         tasks={TasksStoreInstance.tasks}

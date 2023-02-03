@@ -5,4 +5,5 @@ export interface CheckboxProps {
   checked?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   containerClassName?: string;
+  disabled?: boolean;
 }

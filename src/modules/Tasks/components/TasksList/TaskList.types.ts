@@ -2,7 +2,7 @@
 import { TaskEntity } from 'domains/index';
 
 export interface TaskListProps {
-  tasks: TaskEntity[];
+  tasks: TaskEntity[] | null;
   isLoading: boolean;
   changeTaskImportance: (taskId: TaskEntity['id'], targetStatus: boolean) => void;
   deleteTask: (taskId: TaskEntity['id']) => void;

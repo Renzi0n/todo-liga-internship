@@ -165,6 +165,7 @@ module.exports = {
       DEVELOPMENT: isDev,
       PRODUCTION: isProduction,
       TEST: isTest,
+      ...env.stringified,
     }),
     new HtmlWebpackPlugin({
       inject: false,

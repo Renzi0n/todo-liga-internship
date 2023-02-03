@@ -8,18 +8,22 @@ export function TasksList({ tasks, isLoading, changeTaskImportance, deleteTask, 
   return (
     <div className="tasks-wrapper d-flex align-items-center justify-content-center">
       <Loader isLoading={isLoading}>
-        <ul className="list-group todo-list mb-3">
-          {tasks.map((task) => (
-            <li key={task.id} className="list-group-item">
-              <Task
-                task={task}
-                changeTaskImportance={changeTaskImportance}
-                deleteTask={deleteTask}
-                changeTaskComplete={changeTaskComplete}
-              />
-            </li>
-          ))}
-        </ul>
+        {tasks?.length ? (
+          <ul className="list-group todo-list mb-3">
+            {tasks.map((task) => (
+              <li key={task.id} className="list-group-item">
+                <Task
+                  task={task}
+                  changeTaskImportance={changeTaskImportance}
+                  deleteTask={deleteTask}
+                  changeTaskComplete={changeTaskComplete}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Not found</p>
+        )}
       </Loader>
     </div>
   );

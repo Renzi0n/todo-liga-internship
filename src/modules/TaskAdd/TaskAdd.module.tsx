@@ -21,8 +21,8 @@ function TaskAddProto() {
 
   const onSubmit: MouseEventHandler<HTMLButtonElement> = (evt) => {
     evt.preventDefault();
-    handleSubmit((form) => {
-      const res = TaskAddStoreInstance.addTask(form);
+    handleSubmit(async (form) => {
+      const res = await TaskAddStoreInstance.addTask(form);
       if (res) navigate(PATH_LIST.ROOT);
     })();
   };

@@ -1,8 +1,8 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 import { TaskAddFormEntity } from 'domains/taskAdd.entity';
 import { TaskEditFormEntity } from 'domains/taskEdit.entity';
-import { TaskForEditMock } from '__mocks__/Tasks';
-import { delay } from 'helpers/index';
+import { TaskAgentInstance } from 'http/index';
+import { mapToInternalTaskEdit } from 'helpers/mappers';
 
 type PrivateFields = '_taskId' | '_taskForm' | '_isTaskLoading';
 
@@ -42,34 +42,46 @@ class TaskEditStore {
     return this._taskId;
   }
 
-  _taskForm: TaskEditFormEntity = {
+  _taskForm: TaskEditFormEntity | null = {
     name: '',
     info: '',
     isImportant: false,
     isCompleted: false,
   };
 
-  set taskForm(value: TaskEditFormEntity) {
+  set taskForm(value: TaskEditFormEntity | null) {
     this._taskForm = value;
   }
 
-  get taskForm(): TaskEditFormEntity {
+  get taskForm(): TaskEditFormEntity | null {
     return this._taskForm;
   }
 
-  editTask = async (task: TaskAddFormEntity) => {
+  editTask = async (task: TaskAddFormEntity): Promise<boolean> => {
     this._isTaskLoading = true;
-    console.log('task edited', task);
-    await delay(1000);
-    this._isTaskLoading = false;
-    return true;
+    try {
+      if (!this.taskId) throw new Error();
+      await TaskAgentInstance.updateTask(this.taskId, task);
+
+      return true;
+    } catch {
+      return false;
+    } finally {
+      this._isTaskLoading = false;
+    }
   };
 
   getTask = async () => {
     this._isTaskLoading = true;
-    await delay(1000);
-    this._taskForm = TaskForEditMock;
-    this._isTaskLoading = false;
+    try {
+      if (!this.taskId) throw new Error();
+      const res = await TaskAgentInstance.getTask(this.taskId);
+      this._taskForm = mapToInternalTaskEdit(res);
+    } catch {
+      this._taskForm = null;
+    } finally {
+      this._isTaskLoading = false;
+    }
   };
 }
 
