@@ -3,7 +3,7 @@ import { TaskEntity, TasksSearchEntity, TasksStatsEntity } from 'domains/index';
 import { TaskAgentInstance } from 'http/index';
 import { getInternalInfo, mapToExternalParams, mapToInternalTasks } from 'helpers/mappers';
 
-type PrivateFields = '_tasks' | '_tasksStats' | '_isTasksLoading';
+type PrivateFields = '_tasks' | '_tasksStats' | '_isTasksLoading' | '_searchForm';
 
 class TasksStore {
   constructor() {
@@ -11,6 +11,7 @@ class TasksStore {
       _tasks: observable,
       _tasksStats: observable,
       _isTasksLoading: observable,
+      _searchForm: observable,
 
       tasks: computed,
       isTasksLoading: computed,
@@ -48,10 +49,17 @@ class TasksStore {
     return this._tasksStats;
   }
 
+  private _searchForm?: TasksSearchEntity = {
+    searchText: '',
+    tasksType: 'All',
+  };
+
   loadTasks = async (searchForm?: TasksSearchEntity) => {
     this._isTasksLoading = true;
     try {
-      const externalSearchParams = searchForm && mapToExternalParams(searchForm);
+      let externalSearchParams;
+      if (searchForm) this._searchForm = searchForm;
+      externalSearchParams = mapToExternalParams(this._searchForm);
       const res = await TaskAgentInstance.getAllTasks(externalSearchParams);
       this._tasks = mapToInternalTasks(res);
       this._tasksStats = getInternalInfo(res);

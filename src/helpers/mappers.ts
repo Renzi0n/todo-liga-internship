@@ -2,7 +2,10 @@ import { FILTER_TYPES } from 'constants/index';
 import { TaskEditFormEntity, TaskEntity, TasksSearchEntity, TasksStatsEntity } from 'domains/index';
 import { GetAllTasksQuery, GetAllTasksResponse, GetTaskResponse } from 'http/index';
 
-export const mapToExternalParams = ({ searchText, tasksType }: TasksSearchEntity): GetAllTasksQuery => {
+export const mapToExternalParams = (params?: TasksSearchEntity): GetAllTasksQuery | undefined => {
+  if (!params) return undefined;
+
+  const { searchText, tasksType } = params;
   let isCompleted = undefined;
 
   if (tasksType === FILTER_TYPES.DONE) isCompleted = true;
