@@ -63,9 +63,6 @@
       "domains/*": [
         "src/domains/*"
       ],
-      "services/*": [
-        "src/services/*"
-      ],
       "helpers/*": [
         "src/helpers/*"
       ],
